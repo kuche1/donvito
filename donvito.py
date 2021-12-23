@@ -109,6 +109,7 @@ def main():
         pizzas = soup.find_all(class_='product-box clearfloat')
 
         for pizza_ind, pizza in enumerate(pizzas):
+
             image = pizza.find(class_='product-box-image').img.get('src')
             image_link = BASE_URL + image
         
@@ -145,8 +146,8 @@ def main():
         pizza.show_info()
         pizza.show_image()
 
-        com = input()
-        if com == 'n':
+        com = input('> ')
+        if com in ['n', '']:
             ind += 1
             if ind >= len(pizzas):
                 ind = len(pizzas) - 1
@@ -156,7 +157,12 @@ def main():
                 ind = 0
         elif com == 's':
             ind = 0
+        elif com == 'debug':
+            breakpoint()
+        elif com in ['exit', 'stop', 'close']:
+            break
         else:
             print(f'unknown command: {com}')
+            input()
 
 main()
